@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trabalho</title>
+    <!-- Inclui os scripts necessários -->
+    <script type="text/javascript" src="libs/three.js"></script> <!-- Biblioteca Three.js -->
+    <script type="text/javascript" src="libs/jquery-1.9.0.js"></script> <!-- jQuery -->
+    <script type="text/javascript" src="libs/stats.js"></script> <!-- Estatísticas para monitorizar o desempenho -->
+    <script type="text/javascript" src="libs/dat.gui.js"></script> <!-- Interface gráfica de utilizador interativa -->
+    <script type="text/javascript" src="MyTable.js"></script> <!-- Script para a classe MyTable -->
+    <script type="text/javascript" src="Estante.js"></script> <!-- Script para a classe Estante -->
+    <script type="text/javascript" src="MyRobot.js"></script> <!-- Script para a classe MyRobot -->
+    <script type="text/javascript" src="Webgl.js"></script> <!-- Script para a classe Webgl -->
+    <script type="text/javascript" src="GUI.js"></script> <!-- Script para a interface gráfica de utilizador -->
+    <script type="text/javascript" src="libs/TrackballControls.js"></script> <!-- Controlos de Trackball -->
+    <script type="text/javascript" src="libs/OrbitControls.js"></script> <!-- Controlos de Órbita -->
+    <script type="text/javascript" src="libs/FirstPersonControls.js"></script> <!-- Controlos de Primeira Pessoa -->
+    <script type="text/javascript" src="libs/chroma.js"></script> <!-- Biblioteca Chroma.js -->
+    <script type="text/javascript" src="libs/FlyControls.js"></script> <!-- Controlos de Voo -->
+
+    <!-- Estilos CSS -->
+    <style>
+        body {
+            /* Define margem como 0 e overflow como oculto, para preencher toda a tela */
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Div que conterá a saída da interface gráfica de utilizador -->
+    <div id="GUI-output">
+    </div>
+
+    <!-- Div que conterá a saída WebGL -->
+    <div id="WebGL-output">
+    </div>
+
+    <!-- Script JavaScript -->
+    <script type="text/javascript">
+        // Aguarda o carregamento completo do DOM
+        $(function (){
+            // Cria uma nova instância da classe Webgl
+            let webgl = new Webgl();
+
+            // Função para renderizar a cena de forma contínua
+            let render = function (){
+                requestAnimationFrame(render); // Chama a próxima renderização
+                webgl.render(); // Renderiza a cena utilizando a instância da classe Webgl
+            };    
+
+            render(); // Inicia o ciclo de renderização
+        });
+    </script>
+</body>
+</html>

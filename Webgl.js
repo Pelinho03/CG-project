@@ -1,63 +1,59 @@
-'use strict';
+"use strict";
 
-// Define a classe `Webgl` para configurar e renderizar uma cena 3D
-class Webgl {
+/*
+   This file contains the weblg initialization code (creation of scene, camera, renderer, ...).
+*/
 
-  // Função construtora para inicializar o ambiente WebGL
-  constructor() {
-        
-    this.clock = new THREE.Clock(); // Relógio para medir o tempo entre frames
+import * as THREE from "three";
+import { TrackballControls } from "three/addons/controls/TrackballControls.js";
 
-    this.scene = new THREE.Scene(); // Cria uma nova cena
-    this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000); // Cria uma câmara perspetiva
+export class Webgl {
+    clock;
+    renderer;
+    scene;
+    camera;
+    trackballControls;
 
-    this.group = new THREE.Group(); // Cria um grupo para organizar objetos na cena
-    
+    constructor() {
+        this.clock = new THREE.Clock();
 
-    // Cria um renderizador e define o seu tamanho
-    this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setClearColor(0xEEEEEE); // Define a cor de fundo do renderizador
-    this.renderer.setSize(window.innerWidth, window.innerHeight); // Define o tamanho do renderizador
-    this.renderer.shadowMapEnabled = true; // Ativa o mapeamento de sombras
+        // create a render and set the size
+        const canvas = document.querySelector("#WebGL-canvas");
+        this.renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
+        this.renderer.useLegacyLights = true;
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // Posiciona e orienta a câmara para o centro da cena
-    this.camera.position.x = 100;
-    this.camera.position.y = 10;
-    this.camera.position.z = 10;
-    this.camera.lookAt(this.scene.position);
-        
-    // Configura os controlos da câmara (TrackballControls)
-    this.trackballControls = new THREE.TrackballControls(this.camera);
-    this.trackballControls.rotateSpeed = 1.0;
-    this.trackballControls.zoomSpeed = 1.0;
-    this.trackballControls.panSpeed = 1.0;
-    this.trackballControls.staticMoving = true;
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0x555555);
 
-    // Configura os controlos da câmara (FirstPersonControls)
-    this.CamControls = new THREE.FirstPersonControls(this.camera);
-    
-    // Configura os controlos da câmara (FlyControls)
-    this.FlyControls = new THREE.FlyControls(this.camera);
+        // create camera, position and point the camera to the center of the scene
+        this.camera = new THREE.PerspectiveCamera(
+            45,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+        );
+        this.camera.position.x = 600;
+        this.camera.position.y = 400;
+        this.camera.position.z = 200;
+        this.camera.lookAt(this.scene.position);
 
-    // Configura os controlos da câmara (OrbitControls)
-    this.orbitControls = new THREE.OrbitControls(this.camera);
-    
-    // Adiciona a saída do renderizador ao elemento HTML
-    $("#WebGL-output").append(this.renderer.domElement);
+        this.trackballControls = new TrackballControls(
+            this.camera,
+            this.renderer.domElement
+        );
+        this.trackballControls.rotateSpeed = 10.0;
+        this.trackballControls.zoomSpeed = 1.0;
+        this.trackballControls.panSpeed = 1.0;
+        //    trackballControls.noZoom=false;
+        //    trackballControls.noPan=false;
+        this.trackballControls.staticMoving = true;
+        //    trackballControls.dynamicDampingFactor=0.3;
+    }
 
-    this.gui = new GUI(this); // Cria a interface gráfica do utilizador (GUI)
-  }
-  
-  // Método para renderizar a cena
-  render() {
-    let delta = this.clock.getDelta(); // Obtém o tempo desde o último frame
-    this.trackballControls.update(delta); // Atualiza os controlos Trackball
-    this.orbitControls.update(delta); // Atualiza os controlos Orbit
-    this.CamControls.update(delta); // Atualiza os controlos de Primeira Pessoa
-    this.FlyControls.update(delta); // Atualiza os controlos de Voo
-    
-    // Renderiza a cena
-    this.renderer.render(this.scene, this.camera);
-  }
-
+    render() {
+        const delta = this.clock.getDelta();
+        this.trackballControls.update(delta);
+        this.renderer.render(this.scene, this.camera);
+    }
 }

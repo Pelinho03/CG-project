@@ -19,9 +19,9 @@
 import * as THREE from "three";
 import * as SceneUtils from "three/addons/utils/SceneUtils.js";
 
-// MtBox is a subclass of THREE.Object3D.
-// The class MtBox inheriths all the mechods and properties of THREE.Object3D.
-export class MtBox extends THREE.Object3D {
+// MyBox is a subclass of THREE.Object3D.
+// The class MyBox inheriths all the mechods and properties of THREE.Object3D.
+export class MyBox extends THREE.Object3D {
     constructor(lc, ac, ec, cc) {
         super();
 

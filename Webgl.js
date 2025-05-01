@@ -33,22 +33,47 @@ export class Webgl {
             0.1,
             1000
         );
-        this.camera.position.x = 600;
-        this.camera.position.y = 400;
-        this.camera.position.z = 200;
+        this.camera.position.set(600, 400, 200);
         this.camera.lookAt(this.scene.position);
 
         this.trackballControls = new TrackballControls(
             this.camera,
             this.renderer.domElement
         );
+
         this.trackballControls.rotateSpeed = 10.0;
         this.trackballControls.zoomSpeed = 1.0;
         this.trackballControls.panSpeed = 1.0;
-        //    trackballControls.noZoom=false;
-        //    trackballControls.noPan=false;
         this.trackballControls.staticMoving = true;
-        //    trackballControls.dynamicDampingFactor=0.3;
+    }
+
+    // Método para alternar entre câmeras
+    switchCamera() {
+        if (this.camera instanceof THREE.PerspectiveCamera) {
+            const aspect = window.innerWidth / window.innerHeight;
+            this.camera = new THREE.OrthographicCamera(
+                -aspect * 200,
+                aspect * 200,
+                200,
+                -200,
+                -200,
+                500
+            );
+            this.camera.position.set(120, 60, 180);
+            this.camera.lookAt(this.scene.position);
+        } else {
+            this.camera = new THREE.PerspectiveCamera(
+                45,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            );
+            this.camera.position.set(600, 400, 200);
+            this.camera.lookAt(this.scene.position);
+        }
+
+        // Atualizar os controles para usar a nova câmera
+        this.trackballControls.object = this.camera;
     }
 
     render() {

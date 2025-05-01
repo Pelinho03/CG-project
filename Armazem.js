@@ -2,6 +2,7 @@
 
 import * as THREE from "three";
 import { MyBookcase } from "./Estante.js";
+import { MyRobot } from "./robot.js";
 
 export class MyWarehouse extends THREE.Object3D {
     constructor(la, aa, ca) {
@@ -103,6 +104,20 @@ export class MyWarehouse extends THREE.Object3D {
         this.add(estante1);
         this.add(estante2);
         this.add(estante3);
+        //-----------------------------------//
+
+        //-----------------------------------//
+        // Criar o robot
+        //-----------------------------------//
+        const lr = 200;
+        const ar = 250;
+        const cr = 200;
+
+        const robot = new MyRobot(lr, ar, cr);
+        robot.position.set(ar * 5, lr / 5, -lr * 3); // x y z
+        robot.rotateY(THREE.MathUtils.degToRad(90));
+
+        this.add(robot);
         //-----------------------------------//
 
         //-----------------------------------//

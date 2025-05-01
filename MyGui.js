@@ -38,10 +38,14 @@ export class MyGui {
                         ? "Perspectiva"
                         : "Orthographic";
             },
+            firstPersonControls: false,
         };
 
         const gui = new GUI();
         const trackballControls = gui.add(guiVars, "trackballControls");
+        const firstPersonToggle = gui
+            .add(guiVars, "firstPersonControls")
+            .name("Primeira Pessoa");
         const limparCena = gui.add(guiVars, "limparCena");
         const verCaixa = gui.add(guiVars, "verCaixa");
         const camTrocar = gui.add(guiVars, "switchCamera");
@@ -52,6 +56,13 @@ export class MyGui {
         trackballControls.onChange((value) => {
             this.webgl.trackballControls.enabled =
                 !this.webgl.trackballControls.enabled;
+        });
+        firstPersonToggle.onChange((value) => {
+            if (value) {
+                this.webgl.enableFirstPersonControls();
+            } else {
+                this.webgl.disableControls();
+            }
         });
     }
 }

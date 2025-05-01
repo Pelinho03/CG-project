@@ -6,6 +6,7 @@
 
 import * as THREE from "three";
 import { TrackballControls } from "three/addons/controls/TrackballControls.js";
+import { FirstPersonControls } from "three/addons/controls/FirstPersonControls.js";
 
 export class Webgl {
     clock;
@@ -76,9 +77,44 @@ export class Webgl {
         this.trackballControls.object = this.camera;
     }
 
+    enableFirstPersonControls() {
+        this.disposeCurrentControls();
+
+        this.firstPersonControls = new FirstPersonControls(
+            this.camera,
+            this.renderer.domElement
+        );
+        this.firstPersonControls.movementSpeed = 20;
+        this.firstPersonControls.lookSpeed = 0.1;
+        this.firstPersonControls.lookVertical = true;
+        this.firstPersonControls.constrainVertical = true;
+        this.firstPersonControls.verticalMin = 1.0;
+        this.firstPersonControls.verticalMax = 2.0;
+        this.firstPersonControls.lon = -150;
+        this.firstPersonControls.lat = 120;
+    }
+
+    disableControls() {
+        this.disposeCurrentControls();
+    }
+
+    disposeCurrentControls() {
+        if (this.trackballControls) {
+            this.trackballControls.dispose();
+            this.trackballControls = null;
+        }
+        if (this.firstPersonControls) {
+            this.firstPersonControls.dispose?.();
+            this.firstPersonControls = null;
+        }
+    }
+
     render() {
         const delta = this.clock.getDelta();
-        this.trackballControls.update(delta);
+
+        if (this.trackballControls) this.trackballControls.update(delta);
+        if (this.firstPersonControls) this.firstPersonControls.update(delta);
+
         this.renderer.render(this.scene, this.camera);
     }
 }

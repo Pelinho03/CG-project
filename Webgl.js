@@ -33,13 +33,13 @@ export class Webgl {
 
         // create camera, position and point the camera to the center of the scene
         this.camera = new THREE.PerspectiveCamera(
-            45,
+            40,
             window.innerWidth / window.innerHeight,
             0.1,
-            10000
+            20000
         );
-        this.camera.position.set(800, 500, 900); // x y z
-        this.camera.lookAt(this.scene.position);
+        this.camera.position.set(0, 2000, -4000); // x y z
+        this.camera.lookAt(0, 0, 0);
 
         this.trackballControls = new TrackballControls(
             this.camera,

@@ -14,7 +14,7 @@ export class MyBox extends THREE.Object3D {
         //-----------------------------------//
         const lateral_direita = this.createMesh(
             new THREE.BoxGeometry(ec, ac, cc, 16, 16, 16),
-            0x918300
+            0x5da334
         );
         lateral_direita.translateX(lc / 2 - ec / 2);
         lateral_direita.translateY(ac / 2);
@@ -28,7 +28,7 @@ export class MyBox extends THREE.Object3D {
         //-----------------------------------//
         const lateral_esquerda = this.createMesh(
             new THREE.BoxGeometry(ec, ac, cc, 16, 16, 16),
-            0x918300
+            0x5da334
         );
         lateral_esquerda.translateX(-lc / 2 + ec / 2);
         lateral_esquerda.translateY(ac / 2);
@@ -42,7 +42,7 @@ export class MyBox extends THREE.Object3D {
         //-----------------------------------//
         const fundo_traseiro = this.createMesh(
             new THREE.BoxGeometry(lc, ac, ec, 16, 16, 16),
-            0x918300
+            0x5da334
         );
         fundo_traseiro.translateX(0);
         fundo_traseiro.translateY(ac / 2);
@@ -56,7 +56,7 @@ export class MyBox extends THREE.Object3D {
         //-----------------------------------//
         const fundo_frontal = this.createMesh(
             new THREE.BoxGeometry(lc, ac, ec, 16, 16, 16),
-            0x918300
+            0x5da334
         );
         fundo_frontal.translateX(0);
         fundo_frontal.translateY(ac / 2);

@@ -12,7 +12,7 @@ export class MyRobot extends THREE.Object3D {
         //-----------------------------------//
         const corpo = this.createMesh(
             new THREE.BoxGeometry(lr, ar, cr, 16, 16, 16),
-            0x5da334
+            0x3b9da8
         );
         corpo.position.set(0, ar / 2, 0);
         corpo.add(new THREE.AxesHelper(300));
@@ -71,7 +71,7 @@ export class MyRobot extends THREE.Object3D {
         //-----------------------------------//
         const cabeca = this.createMesh(
             new THREE.BoxGeometry(lr * 0.75, ar / 2, cr / 2, 16, 16, 16),
-            0x5da334
+            0x3b9da8
         );
         cabeca.position.set(0, ar + ar / 3, 0);
         cabeca.add(new THREE.AxesHelper(300));

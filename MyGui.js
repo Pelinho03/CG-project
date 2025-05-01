@@ -34,21 +34,33 @@ export class MyGui {
             switchCamera: () => {
                 this.webgl.switchCamera();
                 guiVars.Perspectiva =
-                    this.webgl.camera instanceof THREE.PerspectivaCamera
+                    this.webgl.camera instanceof THREE.PerspectiveCamera
                         ? "Perspectiva"
                         : "Orthographic";
             },
             firstPersonControls: false,
+            flyControls: false,
+            orbitControls: false,
         };
 
         const gui = new GUI();
-        const trackballControls = gui.add(guiVars, "trackballControls");
+        const trackballControls = gui
+            .add(guiVars, "trackballControls")
+            .name("Trackball");
         const firstPersonToggle = gui
             .add(guiVars, "firstPersonControls")
             .name("Primeira Pessoa");
-        const limparCena = gui.add(guiVars, "limparCena");
-        const verCaixa = gui.add(guiVars, "verCaixa");
-        const camTrocar = gui.add(guiVars, "switchCamera");
+        const flyControls = gui
+            .add(guiVars, "flyControls")
+            .name("Fly Controls");
+        const orbitControls = gui
+            .add(guiVars, "orbitControls")
+            .name("Orbit Controls");
+        const limparCena = gui.add(guiVars, "limparCena").name("Limpar Cena");
+        const verCaixa = gui.add(guiVars, "verCaixa").name("Ver Caixa");
+        const camTrocar = gui
+            .add(guiVars, "switchCamera")
+            .name("Trocar Camera");
         const camPerspetiva = gui.add(guiVars, "Perspectiva").listen();
         // camera.lookAt(scene.position);
         // render();
@@ -62,6 +74,20 @@ export class MyGui {
                 this.webgl.enableFirstPersonControls();
             } else {
                 this.webgl.disableControls();
+            }
+        });
+        flyControls.onChange((value) => {
+            if (value) {
+                this.webgl.enableFlyControls();
+            } else {
+                this.webgl.disableFlyControls();
+            }
+        });
+        orbitControls.onChange((value) => {
+            if (value) {
+                this.webgl.enableOrbitControls();
+            } else {
+                this.webgl.disableOrbitControls();
             }
         });
     }

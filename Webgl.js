@@ -7,6 +7,8 @@
 import * as THREE from "three";
 import { TrackballControls } from "three/addons/controls/TrackballControls.js";
 import { FirstPersonControls } from "three/addons/controls/FirstPersonControls.js";
+import { FlyControls } from "three/addons/controls/FlyControls.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 export class Webgl {
     clock;
@@ -48,7 +50,9 @@ export class Webgl {
         this.trackballControls.staticMoving = true;
     }
 
+    //-----------------------------------//
     // Método para alternar entre câmeras
+    //-----------------------------------//
     switchCamera() {
         if (this.camera instanceof THREE.PerspectiveCamera) {
             const aspect = window.innerWidth / window.innerHeight;
@@ -76,7 +80,11 @@ export class Webgl {
         // Atualizar os controles para usar a nova câmera
         this.trackballControls.object = this.camera;
     }
+    //-----------------------------------//
 
+    //-----------------------------------//
+    // Método para controlo de Primeira Pessoa
+    //-----------------------------------//
     enableFirstPersonControls() {
         this.disposeCurrentControls();
 
@@ -97,7 +105,50 @@ export class Webgl {
     disableControls() {
         this.disposeCurrentControls();
     }
+    //-----------------------------------//
 
+    //-----------------------------------//
+    // Método para Fly Controls
+    //-----------------------------------//
+    enableFlyControls() {
+        this.disposeCurrentControls();
+
+        this.flyControls = new FlyControls(
+            this.camera,
+            this.renderer.domElement
+        );
+
+        this.flyControls.movementSpeed = 125;
+        this.flyControls.rollSpeed = Math.PI / 24;
+        this.flyControls.autoForward = true;
+        this.flyControls.dragToLook = false;
+    }
+    disableFlyControls() {
+        this.disposeCurrentControls();
+    }
+    //-----------------------------------//
+
+    //-----------------------------------//
+    // Método para Orbit Controls
+    //-----------------------------------//
+    enableOrbitControls() {
+        this.disposeCurrentControls();
+
+        this.orbitControls = new OrbitControls(
+            this.camera,
+            this.renderer.domElement
+        );
+
+        this.orbitControls.autoRotate = true;
+    }
+    disableOrbitControls() {
+        this.disposeCurrentControls();
+    }
+    //-----------------------------------//
+
+    //-----------------------------------//
+    // Método para desativar os controlos
+    //-----------------------------------//
     disposeCurrentControls() {
         if (this.trackballControls) {
             this.trackballControls.dispose();
@@ -107,14 +158,29 @@ export class Webgl {
             this.firstPersonControls.dispose?.();
             this.firstPersonControls = null;
         }
+        if (this.flyControls) {
+            this.flyControls.dispose?.();
+            this.flyControls = null;
+        }
+        if (this.orbitControls) {
+            this.orbitControls.dispose();
+            this.orbitControls = null;
+        }
     }
+    //-----------------------------------//
 
+    //-----------------------------------//
+    // Render
+    //-----------------------------------//
     render() {
         const delta = this.clock.getDelta();
 
         if (this.trackballControls) this.trackballControls.update(delta);
         if (this.firstPersonControls) this.firstPersonControls.update(delta);
+        if (this.flyControls) this.flyControls.update(delta);
+        if (this.orbitControls) this.orbitControls.update(delta);
 
         this.renderer.render(this.scene, this.camera);
     }
+    //-----------------------------------//
 }

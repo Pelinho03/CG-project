@@ -13,6 +13,7 @@ import { Webgl } from "./Webgl.js";
 import { MyBox } from "./Caixa.js";
 import { MyBookcase } from "./Estante.js";
 import { MyWarehouse } from "./Armazem.js";
+import { MyRobot } from "./robot.js";
 
 export class MyGui {
     webgl;
@@ -41,6 +42,11 @@ export class MyGui {
                 this.webgl.scene.add(new THREE.AxesHelper(50));
                 const armazem = new MyWarehouse(3000, 1500, 2000); //la, aa, ca
                 this.webgl.scene.add(armazem);
+            },
+            verRobot: () => {
+                this.webgl.scene.add(new THREE.AxesHelper(50));
+                const robot = new MyRobot(400, 500, 400); // lr, ar, cr
+                this.webgl.scene.add(robot);
             },
             Perspectiva: "Perspectiva",
             switchCamera: () => {
@@ -72,6 +78,7 @@ export class MyGui {
         const verCaixa = gui.add(guiVars, "verCaixa").name("Ver Caixa");
         const verEstante = gui.add(guiVars, "verEstante").name("Ver Estante");
         const verArmazem = gui.add(guiVars, "verArmazem").name("Ver Armazem");
+        const verRobot = gui.add(guiVars, "verRobot").name("Ver Robot");
         const camTrocar = gui
             .add(guiVars, "switchCamera")
             .name("Trocar Camera");

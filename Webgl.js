@@ -25,6 +25,8 @@ export class Webgl {
         this.renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
         this.renderer.useLegacyLights = true;
         this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x555555);
@@ -34,15 +36,29 @@ export class Webgl {
             45,
             window.innerWidth / window.innerHeight,
             0.1,
-            1000
+            10000
         );
-        this.camera.position.set(600, 400, 200);
+        this.camera.position.set(800, 500, 900); // x y z
         this.camera.lookAt(this.scene.position);
 
         this.trackballControls = new TrackballControls(
             this.camera,
             this.renderer.domElement
         );
+
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(500, 1000, 500); // Posição da luz
+        light.castShadow = true; // Habilitar sombras na luz
+        light.shadow.mapSize.width = 2048; // Resolução do mapa de sombras
+        light.shadow.mapSize.height = 2048;
+        light.shadow.camera.near = 0.5;
+        light.shadow.camera.far = 3000;
+
+        this.scene.add(light);
+
+        // Adicionar uma luz ambiente para iluminar uniformemente
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.5); // Cor e intensidade
+        this.scene.add(ambientLight);
 
         this.trackballControls.rotateSpeed = 10.0;
         this.trackballControls.zoomSpeed = 1.0;

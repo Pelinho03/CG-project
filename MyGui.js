@@ -10,7 +10,8 @@
 import * as THREE from "three";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js"; // https://www.npmjs.com/package/lil-gui
 import { Webgl } from "./Webgl.js";
-import { MyBox } from "./Models.js";
+import { MyBox } from "./Caixa.js";
+import { MyBookcase } from "./Estante.js";
 
 export class MyGui {
     webgl;
@@ -29,6 +30,11 @@ export class MyGui {
 
                 const caixa1 = new MyBox(400, 105, 10, 270); //lc, ac, ec, cc
                 this.webgl.scene.add(caixa1);
+            },
+            verEstante: () => {
+                this.webgl.scene.add(new THREE.AxesHelper(50));
+                const estante1 = new MyBookcase(450, 10, 1200, 10, 30, 650); // le, ae, ce, lp, ep, ap
+                this.webgl.scene.add(estante1);
             },
             Perspectiva: "Perspectiva",
             switchCamera: () => {
@@ -58,6 +64,7 @@ export class MyGui {
             .name("Orbit Controls");
         const limparCena = gui.add(guiVars, "limparCena").name("Limpar Cena");
         const verCaixa = gui.add(guiVars, "verCaixa").name("Ver Caixa");
+        const verEstante = gui.add(guiVars, "verEstante").name("Ver Estante");
         const camTrocar = gui
             .add(guiVars, "switchCamera")
             .name("Trocar Camera");

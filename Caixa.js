@@ -1,31 +1,17 @@
 "use strict";
 
-/*
-   This file aims to contain all the graphical models that will be developed along the course.
-   Create a javascript Class for each graphical model.
-   Export each graphical model by preceeding the Class definition with the 'export' keyword.
-   
-   Template for a Class:
-     export class ClassName {
-       constructor() { ... }
-       mechod_1() { ... }
-       mechod_2() { ... }
-       mechod_3() { ... }
-     }
-     
-   Within a Class, use the 'this' keyword to define properties that are available on the scope of the object.
-*/
-
 import * as THREE from "three";
 import * as SceneUtils from "three/addons/utils/SceneUtils.js";
 
 // MyBox is a subclass of THREE.Object3D.
-// The class MyBox inheriths all the mechods and properties of THREE.Object3D.
+// The class MyBox inherits all the methods and properties of THREE.Object3D.
 export class MyBox extends THREE.Object3D {
     constructor(lc, ac, ec, cc) {
         super();
 
-        // Lateral direita
+        //-----------------------------------//
+        // Criar a lateral direita
+        //-----------------------------------//
         const lateral_direita = this.createMesh(
             new THREE.BoxGeometry(ec, ac, cc, 16, 16, 16),
             0x918300
@@ -34,8 +20,12 @@ export class MyBox extends THREE.Object3D {
         lateral_direita.translateY(ac / 2);
         lateral_direita.translateZ(0);
         lateral_direita.add(new THREE.AxesHelper(10));
+        lateral_direita.castShadow = true;
+        lateral_direita.receiveShadow = true;
 
-        // Lateral esquerda
+        //-----------------------------------//
+        // Criar a lateral esquerda
+        //-----------------------------------//
         const lateral_esquerda = this.createMesh(
             new THREE.BoxGeometry(ec, ac, cc, 16, 16, 16),
             0x918300
@@ -44,8 +34,12 @@ export class MyBox extends THREE.Object3D {
         lateral_esquerda.translateY(ac / 2);
         lateral_esquerda.translateZ(0);
         lateral_esquerda.add(new THREE.AxesHelper(10));
+        lateral_esquerda.castShadow = true;
+        lateral_esquerda.receiveShadow = true;
 
-        // Fundo traseiro
+        //-----------------------------------//
+        // Criar o fundo traseiro
+        //-----------------------------------//
         const fundo_traseiro = this.createMesh(
             new THREE.BoxGeometry(lc, ac, ec, 16, 16, 16),
             0x918300
@@ -54,8 +48,12 @@ export class MyBox extends THREE.Object3D {
         fundo_traseiro.translateY(ac / 2);
         fundo_traseiro.translateZ(-cc / 2 + ec / 2);
         fundo_traseiro.add(new THREE.AxesHelper(10));
+        fundo_traseiro.castShadow = true;
+        fundo_traseiro.receiveShadow = true;
 
-        // Fundo frontal
+        //-----------------------------------//
+        // Criar o fundo frontal
+        //-----------------------------------//
         const fundo_frontal = this.createMesh(
             new THREE.BoxGeometry(lc, ac, ec, 16, 16, 16),
             0x918300
@@ -64,8 +62,12 @@ export class MyBox extends THREE.Object3D {
         fundo_frontal.translateY(ac / 2);
         fundo_frontal.translateZ(cc / 2 - ec / 2);
         fundo_frontal.add(new THREE.AxesHelper(10));
+        fundo_frontal.castShadow = true;
+        fundo_frontal.receiveShadow = true;
 
-        // Base
+        //-----------------------------------//
+        // Criar a base
+        //-----------------------------------//
         const base = this.createMesh(
             new THREE.BoxGeometry(lc, ec, cc, 16, 16, 16),
             0x000000
@@ -74,8 +76,12 @@ export class MyBox extends THREE.Object3D {
         base.translateY(ec / 2);
         base.translateZ(0);
         base.add(new THREE.AxesHelper(10));
+        base.castShadow = true;
+        base.receiveShadow = true;
 
+        //-----------------------------------//
         // Adicionar as partes à estrutura principal
+        //-----------------------------------//
         this.add(lateral_direita);
         this.add(lateral_esquerda);
         this.add(fundo_traseiro);
@@ -83,19 +89,17 @@ export class MyBox extends THREE.Object3D {
         this.add(base);
     }
 
+    //-----------------------------------//
+    // Método para criar um mesh com material normal e wireframe
+    //-----------------------------------//
     createMesh(geom, color) {
-        const meshMaterial = new THREE.MeshNormalMaterial();
-        meshMaterial.side = THREE.DoubleSide;
-        const wireFrameMat = new THREE.MeshBasicMaterial({
+        const meshMaterial = new THREE.MeshStandardMaterial({
             color: color,
-            wireframe: false,
+            roughness: 0.5, // Controla a rugosidade
+            metalness: 0.1, // Controla o brilho metálico
         });
 
-        const mesh = SceneUtils.createMultiMaterialObject(geom, [
-            meshMaterial,
-            wireFrameMat,
-        ]);
-
+        const mesh = new THREE.Mesh(geom, meshMaterial);
         return mesh;
     }
 }

@@ -19,7 +19,7 @@ export class MyBox extends THREE.Object3D {
         lateral_direita.translateX(lc / 2 - ec / 2);
         lateral_direita.translateY(ac / 2);
         lateral_direita.translateZ(0);
-        lateral_direita.add(new THREE.AxesHelper(10));
+        // lateral_direita.add(new THREE.AxesHelper(10));
         lateral_direita.castShadow = true;
         lateral_direita.receiveShadow = true;
 
@@ -33,7 +33,7 @@ export class MyBox extends THREE.Object3D {
         lateral_esquerda.translateX(-lc / 2 + ec / 2);
         lateral_esquerda.translateY(ac / 2);
         lateral_esquerda.translateZ(0);
-        lateral_esquerda.add(new THREE.AxesHelper(10));
+        // lateral_esquerda.add(new THREE.AxesHelper(10));
         lateral_esquerda.castShadow = true;
         lateral_esquerda.receiveShadow = true;
 
@@ -47,7 +47,7 @@ export class MyBox extends THREE.Object3D {
         fundo_traseiro.translateX(0);
         fundo_traseiro.translateY(ac / 2);
         fundo_traseiro.translateZ(-cc / 2 + ec / 2);
-        fundo_traseiro.add(new THREE.AxesHelper(10));
+        // fundo_traseiro.add(new THREE.AxesHelper(10));
         fundo_traseiro.castShadow = true;
         fundo_traseiro.receiveShadow = true;
 
@@ -61,7 +61,7 @@ export class MyBox extends THREE.Object3D {
         fundo_frontal.translateX(0);
         fundo_frontal.translateY(ac / 2);
         fundo_frontal.translateZ(cc / 2 - ec / 2);
-        fundo_frontal.add(new THREE.AxesHelper(10));
+        // fundo_frontal.add(new THREE.AxesHelper(10));
         fundo_frontal.castShadow = true;
         fundo_frontal.receiveShadow = true;
 
@@ -75,7 +75,7 @@ export class MyBox extends THREE.Object3D {
         base.translateX(0);
         base.translateY(ec / 2);
         base.translateZ(0);
-        base.add(new THREE.AxesHelper(10));
+        // base.add(new THREE.AxesHelper(10));
         base.castShadow = true;
         base.receiveShadow = true;
 

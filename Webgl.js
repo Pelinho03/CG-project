@@ -46,17 +46,17 @@ export class Webgl {
             this.renderer.domElement
         );
 
+        // Luz direcional
         const light = new THREE.DirectionalLight(0xffffff, 1);
         light.position.set(500, 1000, 500); // Posição da luz
-        light.castShadow = true; // Habilitar sombras na luz
-        light.shadow.mapSize.width = 2048; // Resolução do mapa de sombras
+        light.castShadow = true; // Habilitar sombras
+        light.shadow.mapSize.width = 2048;
         light.shadow.mapSize.height = 2048;
         light.shadow.camera.near = 0.5;
         light.shadow.camera.far = 3000;
-
         this.scene.add(light);
 
-        // Adicionar uma luz ambiente para iluminar uniformemente
+        // Luz ambiente
         const ambientLight = new THREE.AmbientLight(0x404040, 0.5); // Cor e intensidade
         this.scene.add(ambientLight);
 
@@ -65,32 +65,35 @@ export class Webgl {
         this.trackballControls.panSpeed = 1.0;
         this.trackballControls.staticMoving = true;
     }
-
     //-----------------------------------//
     // Método para alternar entre câmeras
     //-----------------------------------//
     switchCamera() {
+        const aspect = window.innerWidth / window.innerHeight;
+
         if (this.camera instanceof THREE.PerspectiveCamera) {
-            const aspect = window.innerWidth / window.innerHeight;
+            // Alternar para câmera ortográfica
+            const viewSize = 1000; // Ajuste o tamanho da visualização
             this.camera = new THREE.OrthographicCamera(
-                -aspect * 200,
-                aspect * 200,
-                200,
-                -200,
-                -200,
-                500
+                -aspect * viewSize, // left
+                aspect * viewSize, // right
+                viewSize, // top
+                -viewSize, // bottom
+                0.1, // near
+                20000 // far
             );
-            this.camera.position.set(120, 60, 180);
-            this.camera.lookAt(this.scene.position);
+            this.camera.position.set(0, 2000, -4000); // Ajuste a posição da câmera
+            this.camera.lookAt(this.scene.position); // Apontar para o centro da cena
         } else {
+            // Alternar para câmera perspectiva
             this.camera = new THREE.PerspectiveCamera(
                 45,
                 window.innerWidth / window.innerHeight,
                 0.1,
-                1000
+                20000
             );
-            this.camera.position.set(600, 400, 200);
-            this.camera.lookAt(this.scene.position);
+            this.camera.position.set(0, 2000, -4000); // Ajuste a posição da câmera
+            this.camera.lookAt(this.scene.position); // Apontar para o centro da cena
         }
 
         // Atualizar os controles para usar a nova câmera
@@ -196,8 +199,9 @@ export class Webgl {
         if (this.flyControls) this.flyControls.update(delta);
         if (this.orbitControls) this.orbitControls.update(delta);
 
+        // Movimentação do robo
         if (this.robot && this.robotMoving) {
-            const speed = 30;
+            const speed = 20;
             const minX = -1000;
             const maxX = 1000;
 

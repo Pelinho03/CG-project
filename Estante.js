@@ -75,7 +75,7 @@ export class MyBookcase extends THREE.Object3D {
         prateleira_2.translateY(400);
         prateleira_2.translateZ(-(ce * 0.25) / 2);
         prateleira_2.rotateX(THREE.MathUtils.degToRad(5));
-        prateleira_2.add(new THREE.AxesHelper(100));
+        // prateleira_2.add(new THREE.AxesHelper(100));
         prateleira_2.castShadow = true;
         prateleira_2.receiveShadow = true;
 
@@ -86,7 +86,7 @@ export class MyBookcase extends THREE.Object3D {
         prateleira_3.translateY(600);
         prateleira_3.translateZ(-(ce * 0.25));
         prateleira_3.rotateX(THREE.MathUtils.degToRad(-5));
-        prateleira_3.add(new THREE.AxesHelper(100));
+        // prateleira_3.add(new THREE.AxesHelper(100));
         prateleira_3.castShadow = true;
         prateleira_3.receiveShadow = true;
         //-----------------------------------//

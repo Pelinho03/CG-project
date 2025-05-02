@@ -24,27 +24,35 @@ export class MyGui {
         const guiVars = {
             trackballControls: true,
             limparCena: () => {
-                for (let i = 0; i < this.webgl.scene.children.length; )
-                    this.webgl.scene.remove(this.webgl.scene.children[i]);
+                for (
+                    let i = this.webgl.scene.children.length - 1;
+                    i >= 0;
+                    i--
+                ) {
+                    const child = this.webgl.scene.children[i];
+                    if (!(child instanceof THREE.Light)) {
+                        this.webgl.scene.remove(child);
+                    }
+                }
             },
             verCaixa: () => {
-                this.webgl.scene.add(new THREE.AxesHelper(50));
+                // this.webgl.scene.add(new THREE.AxesHelper(50));
 
                 const caixa1 = new MyBox(400, 105, 10, 270); //lc, ac, ec, cc
                 this.webgl.scene.add(caixa1);
             },
             verEstante: () => {
-                this.webgl.scene.add(new THREE.AxesHelper(50));
-                const estante1 = new MyBookcase(450, 10, 1200, 10, 30, 650); // le, ae, ce, lp, ep, ap
+                // this.webgl.scene.add(new THREE.AxesHelper(50));
+                const estante1 = new MyBookcase(450, 10, 1200, 20, 40, 650); // le, ae, ce, lp, ep, ap
                 this.webgl.scene.add(estante1);
             },
             verArmazem: () => {
-                this.webgl.scene.add(new THREE.AxesHelper(50));
+                // this.webgl.scene.add(new THREE.AxesHelper(50));
                 const armazem = new MyWarehouse(3000, 1500, 2000); //la, aa, ca
                 this.webgl.scene.add(armazem);
             },
             verRobot: () => {
-                this.webgl.scene.add(new THREE.AxesHelper(50));
+                // this.webgl.scene.add(new THREE.AxesHelper(50));
 
                 const lr = 200;
                 const ar = 250;

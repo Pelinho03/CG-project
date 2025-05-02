@@ -15,7 +15,7 @@ export class MyRobot extends THREE.Object3D {
             0x3b9da8
         );
         corpo.position.set(0, ar / 2, 0);
-        corpo.add(new THREE.AxesHelper(300));
+        // corpo.add(new THREE.AxesHelper(50));
         corpo.castShadow = true;
         corpo.receiveShadow = true;
         //-----------------------------------//
@@ -41,7 +41,7 @@ export class MyRobot extends THREE.Object3D {
             );
             roda.rotation.z = Math.PI / 2; // rodas na vertical
             roda.position.set(x, offsetY, z);
-            roda.add(new THREE.AxesHelper(300));
+            // roda.add(new THREE.AxesHelper(300));
             roda.castShadow = true;
             roda.receiveShadow = true;
             return roda;
@@ -61,7 +61,7 @@ export class MyRobot extends THREE.Object3D {
             0x333333
         );
         pescoco.position.set(0, ar, 0);
-        pescoco.add(new THREE.AxesHelper(300));
+        // pescoco.add(new THREE.AxesHelper(300));
         pescoco.castShadow = true;
         pescoco.receiveShadow = true;
         //-----------------------------------//
@@ -74,7 +74,7 @@ export class MyRobot extends THREE.Object3D {
             0x3b9da8
         );
         cabeca.position.set(0, ar + ar / 3, 0);
-        cabeca.add(new THREE.AxesHelper(300));
+        // cabeca.add(new THREE.AxesHelper(300));
         cabeca.castShadow = true;
         cabeca.receiveShadow = true;
         //-----------------------------------//
@@ -88,7 +88,7 @@ export class MyRobot extends THREE.Object3D {
                 0x333333
             );
             olho.position.set(x, y, z);
-            olho.add(new THREE.AxesHelper(300));
+            // olho.add(new THREE.AxesHelper(300));
             olho.castShadow = true;
             olho.receiveShadow = true;
             return olho;
@@ -113,7 +113,7 @@ export class MyRobot extends THREE.Object3D {
             braco.rotation.z = Math.PI / 2;
             braco.rotation.y = Math.PI / 2;
             braco.position.set(x, y, z);
-            braco.add(new THREE.AxesHelper(100));
+            // braco.add(new THREE.AxesHelper(100));
             braco.castShadow = true;
             braco.receiveShadow = true;
             return braco;

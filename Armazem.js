@@ -117,7 +117,7 @@ export class MyWarehouse extends THREE.Object3D {
         robot.position.set(ar * 5, lr / 5, -lr * 3); // x y z
         robot.rotateY(THREE.MathUtils.degToRad(90));
 
-        this.add(robot);
+        // this.add(robot);
         //-----------------------------------//
 
         //-----------------------------------//

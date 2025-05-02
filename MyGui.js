@@ -45,8 +45,26 @@ export class MyGui {
             },
             verRobot: () => {
                 this.webgl.scene.add(new THREE.AxesHelper(50));
-                const robot = new MyRobot(400, 500, 400); // lr, ar, cr
+
+                const lr = 200;
+                const ar = 250;
+                const cr = 200;
+
+                const robot = new MyRobot(lr, ar, cr);
+                robot.position.set(-1000, lr / 5, -lr * 3);
+                robot.rotateY(THREE.MathUtils.degToRad(-90));
+
                 this.webgl.scene.add(robot);
+
+                // Guardar referência
+                this.webgl.robot = robot;
+                this.webgl.robotDirection = 1;
+                this.webgl.robotMoving = false; // parado
+            },
+            ativarRobot: () => {
+                if (this.webgl.robot) {
+                    this.webgl.robotMoving = true;
+                }
             },
             Perspectiva: "Perspectiva",
             switchCamera: () => {
@@ -79,6 +97,9 @@ export class MyGui {
         const verEstante = gui.add(guiVars, "verEstante").name("Ver Estante");
         const verArmazem = gui.add(guiVars, "verArmazem").name("Ver Armazem");
         const verRobot = gui.add(guiVars, "verRobot").name("Ver Robot");
+        const ativarRobot = gui
+            .add(guiVars, "ativarRobot")
+            .name("Ativar Robot");
         const camTrocar = gui
             .add(guiVars, "switchCamera")
             .name("Trocar Camera");

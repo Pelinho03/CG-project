@@ -196,6 +196,22 @@ export class Webgl {
         if (this.flyControls) this.flyControls.update(delta);
         if (this.orbitControls) this.orbitControls.update(delta);
 
+        if (this.robot && this.robotMoving) {
+            const speed = 30;
+            const minX = -1000;
+            const maxX = 1000;
+
+            this.robot.position.x += this.robotDirection * speed;
+
+            if (this.robot.position.x >= maxX) {
+                this.robotDirection = -1;
+                this.robot.rotation.y = THREE.MathUtils.degToRad(90);
+            } else if (this.robot.position.x <= minX) {
+                this.robotDirection = 1;
+                this.robot.rotation.y = THREE.MathUtils.degToRad(-90);
+            }
+        }
+
         this.renderer.render(this.scene, this.camera);
     }
     //-----------------------------------//

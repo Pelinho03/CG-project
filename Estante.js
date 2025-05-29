@@ -8,7 +8,6 @@ export class MyBookcase extends THREE.Object3D {
     constructor(le, ae, ce, lp, ep, ap) {
         super();
 
-        // Ajustar os deslocamentos para manter as patas nas laterais, mas mais próximas do centro
         const pataXOffset = le / 2 + lp / 2;
         const pataZOffset = (ce / 2 - ep / 2) * 0.5;
 
@@ -199,8 +198,8 @@ export class MyBookcase extends THREE.Object3D {
     createMesh(geom, color) {
         const meshMaterial = new THREE.MeshStandardMaterial({
             color: color,
-            roughness: 0.5, // Controla a rugosidade
-            metalness: 0.1, // Controla o brilho metálico
+            roughness: 0.5, // rugosidade
+            metalness: 0.1, // brilho metálico
         });
 
         const mesh = new THREE.Mesh(geom, meshMaterial);

@@ -15,7 +15,7 @@ export class MyWarehouse extends THREE.Object3D {
             new THREE.BoxGeometry(la, 10, ca), // Largura, espessura, comprimento
             0x918300
         );
-        chao.translateY(5); // Levantar o chão para que fique visível
+        chao.translateY(5); // Levantar o chão
         chao.castShadow = true;
         chao.receiveShadow = true;
         this.add(chao);

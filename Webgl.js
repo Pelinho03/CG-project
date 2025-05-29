@@ -1,9 +1,5 @@
 "use strict";
 
-/*
-   This file contains the weblg initialization code (creation of scene, camera, renderer, ...).
-*/
-
 import * as THREE from "three";
 import { TrackballControls } from "three/addons/controls/TrackballControls.js";
 import { FirstPersonControls } from "three/addons/controls/FirstPersonControls.js";
@@ -49,7 +45,7 @@ export class Webgl {
         // Luz direcional
         const light = new THREE.DirectionalLight(0xffffff, 1);
         light.position.set(500, 1000, 500); // Posição da luz
-        light.castShadow = true; // Habilitar sombras
+        light.castShadow = true; // sombras
         light.shadow.mapSize.width = 2048;
         light.shadow.mapSize.height = 2048;
         light.shadow.camera.near = 0.5;
@@ -73,7 +69,7 @@ export class Webgl {
 
         if (this.camera instanceof THREE.PerspectiveCamera) {
             // Alternar para câmera ortográfica
-            const viewSize = 1000; // Ajuste o tamanho da visualização
+            const viewSize = 1000;
             this.camera = new THREE.OrthographicCamera(
                 -aspect * viewSize, // left
                 aspect * viewSize, // right
@@ -82,8 +78,8 @@ export class Webgl {
                 0.1, // near
                 20000 // far
             );
-            this.camera.position.set(0, 2000, -4000); // Ajuste a posição da câmera
-            this.camera.lookAt(this.scene.position); // Apontar para o centro da cena
+            this.camera.position.set(0, 2000, -4000); // posição da câmera
+            this.camera.lookAt(this.scene.position); // centro da cena
         } else {
             // Alternar para câmera perspectiva
             this.camera = new THREE.PerspectiveCamera(
@@ -92,11 +88,10 @@ export class Webgl {
                 0.1,
                 20000
             );
-            this.camera.position.set(0, 2000, -4000); // Ajuste a posição da câmera
-            this.camera.lookAt(this.scene.position); // Apontar para o centro da cena
+            this.camera.position.set(0, 2000, -4000); // posição da câmera
+            this.camera.lookAt(this.scene.position); // centro da cena
         }
 
-        // Atualizar os controles para usar a nova câmera
         this.trackballControls.object = this.camera;
     }
     //-----------------------------------//

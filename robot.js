@@ -120,7 +120,7 @@ export class MyRobot extends THREE.Object3D {
         };
 
         // Posição dos braços
-        const posicaoYBracos = ar * 0.75; // 75% da altura do corpo
+        const posicaoYBracos = ar * 0.75;
 
         // Posição em X: ligeiramente fora do corpo
         const posicaoXBracos = lr / 2 + lr * 0.1;
@@ -161,8 +161,8 @@ export class MyRobot extends THREE.Object3D {
     createMesh(geom, color) {
         const meshMaterial = new THREE.MeshStandardMaterial({
             color: color,
-            roughness: 0.5, // Controla a rugosidade
-            metalness: 0.1, // Controla o brilho metálico
+            roughness: 0.5, // rugosidade
+            metalness: 0.1, // brilho metálico
         });
 
         const mesh = new THREE.Mesh(geom, meshMaterial);

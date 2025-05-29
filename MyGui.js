@@ -1,12 +1,5 @@
 "use strict";
 
-/*
-   This file aims to deal with human interaction with the application.
-   It presents a little user interface throught which humans interact with the application.
-
-   See https://lil-gui.georgealways.com/#Guide for details.
-*/
-
 import * as THREE from "three";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js"; // https://www.npmjs.com/package/lil-gui
 import { Webgl } from "./Webgl.js";

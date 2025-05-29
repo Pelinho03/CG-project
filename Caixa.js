@@ -2,9 +2,6 @@
 
 import * as THREE from "three";
 import * as SceneUtils from "three/addons/utils/SceneUtils.js";
-
-// MyBox is a subclass of THREE.Object3D.
-// The class MyBox inherits all the methods and properties of THREE.Object3D.
 export class MyBox extends THREE.Object3D {
     constructor(lc, ac, ec, cc) {
         super();
@@ -95,8 +92,8 @@ export class MyBox extends THREE.Object3D {
     createMesh(geom, color) {
         const meshMaterial = new THREE.MeshStandardMaterial({
             color: color,
-            roughness: 0.5, // Controla a rugosidade
-            metalness: 0.1, // Controla o brilho metálico
+            roughness: 0.5, // rugosidade
+            metalness: 0.1, // brilho metálico
         });
 
         const mesh = new THREE.Mesh(geom, meshMaterial);
